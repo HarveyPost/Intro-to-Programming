@@ -10,7 +10,9 @@ def valid_puzzle(puzzle: list) -> bool:
     if not isinstance(puzzle, list) or len(puzzle) < 2:
         return False
     for i in puzzle:
-        # Check if each string is a string, is the same length as the first, and is alphabetical
+        # Check if each string is a string,
+        # is the same length as the first,
+        # and is alphabetical
         if not isinstance(i, str):
             return False
         if len(i) != len(puzzle[0]):
@@ -24,15 +26,25 @@ def similarity_grouping(data: list) -> list:
     groups = []
     for i in data:
         found = False
-        # Iterate through each group, if i is in the group, add it to the group
+        temp = None
+        # Check if i is an integer,
+        # if not, set temp to i
+        try:
+            temp = int(i)
+        except ValueError:
+            temp = i
+        # Iterate through each group,
+        # if temp is in the group,
+        # add it to the group
         for group in groups:
-            if i in group:
-                group.append(i)
+            if temp in group:
+                group.append(temp)
                 found = True
                 break
-        # If i is not in any group, create a new group with i in it
+        # If temp is not in any group,
+        # create a new group with temp in it
         if not found:
-            groups.append([i])
+            groups.append([temp])
     return groups
 
 
@@ -50,7 +62,8 @@ def highest_count_items(data: str) -> list:
             count[item] = 1
     max_count = max(count.values())
     # Return a list of items with the highest count
-    result = [[item, value] for item, value in count.items() if value == max_count]
+    result = [[item, value] for item, value in count.items()
+              if value == max_count]
     return result
 
 
@@ -74,7 +87,8 @@ def total_price(unit: int) -> float:
         return price
     elif unit % 6 == 0:
         price = (unit / 6) * 5
-        # Check if price is over 20, if so apply discount
+        # Check if price is over 20,
+        # if so apply discount
         if price > 20:
             price = price * 0.9
             return price
@@ -87,7 +101,6 @@ def total_price(unit: int) -> float:
             return price
         else:
             return price
-
 
 
 if __name__ == "__main__":
@@ -112,7 +125,7 @@ if __name__ == "__main__":
     # sample test for task 1.2
     data1 = [2, 1, 2, 1]
     data2 = [5, 4, 5, 5, 4, 3]
-    data3 = [1, 2, 1, 3, 'a', 'b', "a",  'c']
+    data3 = [1, 2, 1, 3, "1", 'a', 'b', "a",  'c']
     print(similarity_grouping(data1))
     print(similarity_grouping(data2))
     print(similarity_grouping(data3))
