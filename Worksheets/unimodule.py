@@ -20,7 +20,7 @@ class Transcript():
     
     def add_module(self, item):
         if not isinstance(item, UniModule):
-            raise TypeError("expected item be an instance of UniModule.")
+            raise ValueError("expected item be an instance of UniModule.")
         if item in self.modules:
             raise ValueError("module already exists!")
         self.modules.append(item)
@@ -28,12 +28,3 @@ class Transcript():
     def print_transcript(self):
         for module in self.modules:
             print(module.display_details())
-
-COMP1012 = UniModule("COMP1011", "Intro to Prog.", 1, 10, grade=75, discovery=True)
-COMP1121 = UniModule("COMP1121", "Databases", 1, 10, PFP=True)
-COMP1211 = UniModule("COMP1211", "Comp. Arch.", 1, 10, grade=80, PFP=True)
-t_student1 = Transcript()
-t_student1.add_module(COMP1012)
-t_student1.add_module(COMP1121)
-t_student1.add_module(COMP1211)
-t_student1.print_transcript()
