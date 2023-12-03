@@ -24,14 +24,19 @@ function encdec(){
 	*/
 
   let answer = '';
-  if (operation == 'encode') {
+  if (operation == 'enc') {
     for (let i = 0; i < str_input.length; i++) {
       let char = str_input[i].toUpperCase();
       if (mcode[char] != undefined) {
         answer += mcode[char] + ' ';
       }
+      else if (char !== ' ') {
+        alert("Invalid input")
+      return
+      }
     }
-  } else {
+  }
+  else {
     let str_input_split = str_input.split(' ');
     for (let i = 0; i < str_input_split.length; i++) {
       for (let key in mcode) {
