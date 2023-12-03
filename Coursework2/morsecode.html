@@ -22,15 +22,35 @@ function encdec(){
 	/*
 	write your JavaScript codes below
 	*/
+
+  let answer = '';
+  if (operation == 'encode') {
+    for (let i = 0; i < str_input.length; i++) {
+      let char = str_input[i].toUpperCase();
+      if (mcode[char] != undefined) {
+        answer += mcode[char] + ' ';
+      }
+    }
+  } else {
+    let str_input_split = str_input.split(' ');
+    for (let i = 0; i < str_input_split.length; i++) {
+      for (let key in mcode) {
+        if (mcode[key] == str_input_split[i]) {
+          answer += key;
+        }
+      }
+    }
+  }
+
 	
-	document.getElementById("output").innerHTML = answer;
+	document.getElementById("output").innerHTML = answer.trim();
 }
 
 </script>
 </head>
 <body>
 <H1>Morse code encoder/decoder</H1>
-<h3>@author: write your name here </h3>
+<h3>@author: Harvey Postings</h3>
 <div>
 <form>
 <p> Enter a string</p>
