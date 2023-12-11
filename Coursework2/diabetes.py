@@ -53,7 +53,8 @@ class Diabetes:
             file.write('<title>Diabetes Data Summary</title>\n')
             file.write('</head>\n')
             file.write('<body>\n')
-            file.write('<table border="1" width="100%" style="font-family: Arial; text-align: center;">\n')
+            file.write('<table border="1" width="100%" style="font-family:'
+                       'Arial; text-align: center;">\n')
             file.write('<tr bgcolor="green" style="color: white;">\n')
             file.write('<th rowspan="3">Attribute</th>\n')
             file.write('<th colspan="4">Class</th>\n')
@@ -74,20 +75,27 @@ class Diabetes:
                 # Write the attribute name
                 file.write('<td>{}</td>\n'.format(attribute))
                 # Write the values for the attribute
-                file.write('<td>{}</td>\n'.format(summary_positive[attribute]['Yes']))
-                file.write('<td>{}</td>\n'.format(summary_positive[attribute]['No']))
-                # If the attribute is in the negative summary, write the values
-                file.write('<td>{}</td>\n'.format(summary_negative.get(attribute, {}).get('Yes', 0)))
-                file.write('<td>{}</td>\n'.format(summary_negative.get(attribute, {}).get('No', 0)))
+                file.write('<td>{}</td>\n'.format(
+                    summary_positive[attribute]['Yes']))
+                file.write('<td>{}</td>\n'.format(
+                    summary_positive[attribute]['No']))
+                # If the attribute is in the negative summary,
+                # write the values
+                file.write('<td>{}</td>\n'.format(summary_negative.get(
+                    attribute, {}).get('Yes', 0)))
+                file.write('<td>{}</td>\n'.format(summary_negative.get(
+                    attribute, {}).get('No', 0)))
                 file.write('</tr>\n')
             for attribute in summary_negative.keys():
                 if attribute not in summary_positive:
                     file.write('<tr>\n')
                     file.write('<td>{}</td>\n'.format(attribute))
-                    file.write('<td>{}</td>\n'.format(0))  # No positive instances
-                    file.write('<td>{}</td>\n'.format(0))  # No positive instances
-                    file.write('<td>{}</td>\n'.format(summary_negative[attribute]['Yes']))
-                    file.write('<td>{}</td>\n'.format(summary_negative[attribute]['No']))
+                    file.write('<td>{}</td>\n'.format(0))
+                    file.write('<td>{}</td>\n'.format(0))
+                    file.write('<td>{}</td>\n'.format(
+                        summary_negative[attribute]['Yes']))
+                    file.write('<td>{}</td>\n'.format(
+                        summary_negative[attribute]['No']))
                     file.write('</tr>\n')
             file.write('</table>\n')
             file.write('</body>\n')
@@ -95,10 +103,18 @@ class Diabetes:
 
     def count_instances(self, criteria) -> int:
         """
-        Counts the number of instances in the dataset that match the given criteria
-        The criteria should be provided as a dictionary where the keys are the column names and the values are the attribute values to match.
+        Counts the number of instances in the
+        dataset that match the given criteria
+        
+        The criteria should be provided as a dictionary where the keys are
+        the column names and the values are the attribute values to match.
+        
         The method returns the total count of matching instances.
-        For example, if the criteria is {"Age": 55, "Polyuria": "Yes"}, the method will return the number of instances where the Age is 55 and Polyuria is Yes.
+        
+        For example, if the criteria is {"Age": 55, "Polyuria": "Yes"},
+        the method will return the number of instances where
+        the Age is 55 and Polyuria is Yes.
+        
         For this example you would use the method like this:
             d = Diabetes("diabetes_data.csv")
             count = d.count_instances({"Age": 55, "Polyuria": "Yes"})
@@ -106,8 +122,10 @@ class Diabetes:
         """
         count = 0
         for row in self.data:
-            # Compares header to criteria keys and then compares row to criteria values
-            if all(str(row[self.header.index(key)]) == str(value) for key, value in criteria.items()):
+            # Compares header to criteria keys and
+            # then compares row to criteria values
+            if all(str(row[self.header.index(key)]) == str(value)
+                   for key, value in criteria.items()):
                 count += 1
         return count
 
@@ -120,18 +138,18 @@ if __name__ == "__main__":
     d1 = Diabetes("diabetes_data.csv")
     print(d1.get_dimension())
     d1.web_summary('stat01.html')
-    d1.count_instances({"class": 'Negative', 'Polyuria': 'Yes'})  # change according to your criteria
+    d1.count_instances({"class": 'Negative', 'Polyuria': 'Yes'})
     print()
 
     # test diabetes2_data.csv
     d2 = Diabetes("diabetes2_data.csv")
     print(d2.get_dimension())
     d2.web_summary('stat02.html')
-    d2.count_instances({"Age": 55})  # change according to your criteria
+    d2.count_instances({"Age": 55})
     print()
 
     # test diabetes3_data.csv
     d3 = Diabetes("diabetes3_data.csv")
     print(d3.get_dimension())
     d3.web_summary('stat03.html')
-    d3.count_instances({"Age": 55, "Polyuria": "Yes"})  # change according to your criteria
+    d3.count_instances({"Age": 55, "Polyuria": "Yes"})
